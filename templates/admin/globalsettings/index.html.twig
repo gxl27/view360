@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Globalsettings index{% endblock %}
+
+{% block body %}
+    <h1>Globalsettings index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CloseWebsite</th>
+                <th>Frames</th>
+                <th>Zoom</th>
+                <th>MaxItems</th>
+                <th>CloseRegister</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for globalsetting in globalsettings %}
+            <tr>
+                <td>{{ globalsetting.id }}</td>
+                <td>{{ globalsetting.closeWebsite ? 'Yes' : 'No' }}</td>
+                <td>{{ globalsetting.frames }}</td>
+                <td>{{ globalsetting.zoom }}</td>
+                <td>{{ globalsetting.maxItems }}</td>
+                <td>{{ globalsetting.closeRegister ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_globalsettings_show', {'id': globalsetting.id}) }}">show</a>
+                    <a href="{{ path('app_globalsettings_edit', {'id': globalsetting.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_globalsettings_new') }}">Create new</a>
+{% endblock %}

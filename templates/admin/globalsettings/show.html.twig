@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Globalsettings{% endblock %}
+
+{% block body %}
+    <h1>Globalsettings</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ globalsetting.id }}</td>
+            </tr>
+            <tr>
+                <th>CloseWebsite</th>
+                <td>{{ globalsetting.closeWebsite ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Frames</th>
+                <td>{{ globalsetting.frames }}</td>
+            </tr>
+            <tr>
+                <th>Zoom</th>
+                <td>{{ globalsetting.zoom }}</td>
+            </tr>
+            <tr>
+                <th>MaxItems</th>
+                <td>{{ globalsetting.maxItems }}</td>
+            </tr>
+            <tr>
+                <th>CloseRegister</th>
+                <td>{{ globalsetting.closeRegister ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_globalsettings_index') }}">back to list</a>
+
+    <a href="{{ path('app_globalsettings_edit', {'id': globalsetting.id}) }}">edit</a>
+
+    {{ include('admin/globalsettings/_delete_form.html.twig') }}
+{% endblock %}

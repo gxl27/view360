@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<div>
+    {% for product in products %}
+        {{ product.variant.name }}   - {{ product.color.name }}
+         <img style='max-width:150px' src="{{ vich_uploader_asset(product, 'productImages') }} " alt="product-{{ product.id }}">             
+
+    {% endfor %}
+</div>
+<div id='app'>
+    <example></example>
+
+   
+</div>
+{% endblock %}

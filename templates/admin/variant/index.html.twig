@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Variant index{% endblock %}
+
+{% block body %}
+    <h1>Variant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Document</th>
+                <th>UpdatedAt</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for variant in variants %}
+            <tr>
+                <td>{{ variant.id }}</td>
+                <td>{{ variant.name }}</td>
+                <td>{{ variant.document }}</td>
+                <td>{{ variant.updatedAt ? variant.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ variant.status ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_variant_show', {'id': variant.id}) }}">show</a>
+                    <a href="{{ path('app_variant_edit', {'id': variant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_variant_new') }}">Create new</a>
+{% endblock %}
