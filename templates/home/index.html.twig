@@ -1,19 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #main {
+            padding:0 !important;
+        }
+    </style>
+{% endblock %}
+{% block adminNavbar %}
+    {{ include('/_navbar/_navbar.html.twig') }}
+{% endblock %}
 {% block body %}
 
-<div>
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('vue') }}
+            
+{% endblock %}
+
+
+
+{# <div>
     {% for product in products %}
         {{ product.variant.name }}   - {{ product.color.name }}
          <img style='max-width:150px' src="{{ vich_uploader_asset(product, 'productImages') }} " alt="product-{{ product.id }}">             
 
     {% endfor %}
+</div> #}
+<div id='banner'>
+ <img style="width:100%" src="/img/banner.jpg">
 </div>
 <div id='app'>
-    <example></example>
-
-   
+    <product></product>
 </div>
 {% endblock %}

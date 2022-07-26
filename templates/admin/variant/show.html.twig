@@ -16,10 +16,6 @@
                 <td>{{ variant.name }}</td>
             </tr>
             <tr>
-                <th>Document</th>
-                <td>{{ variant.document }}</td>
-            </tr>
-            <tr>
                 <th>UpdatedAt</th>
                 <td>{{ variant.updatedAt ? variant.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
@@ -29,6 +25,11 @@
             </tr>
         </tbody>
     </table>
+    <div class='wrapper'>
+        {% for product in variant.products %}
+            <a href="{{ path('app_product_show', {id:product.id}) }}"><div> <img style='max-width:50px' src="{{ vich_uploader_asset(product, 'productImages') }} " alt="product-{{ product.id }}"> {{ variant.name }} {{ product.color.name }}</div></a>
+        {% endfor %}
+    </div>
 
     <a href="{{ path('app_variant_index') }}">back to list</a>
 

@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Controller\BaseController;
+use App\Service\PhotoService\PhotoService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,20 +36,10 @@ class ProductController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $file = $form->get('photo')->getData();
-            if($file){
-                $originalName = $file->getClientOriginalName();
-            
-                $filename = $originalName;
-                $uploads_directory = $this->getParameter('uploads_directory') . "photos/";
-                $file->move(
-                    $uploads_directory,
-                    $filename
-                );
-                
-                $product->setDocument($filename);
-            }
+
+            // check if the file it's valid and set $product->setDocument();
+            $photoName = new PhotoService($form->get('photo')->getData(), $this->getParameter('uploads_directory'));
+            $product->setDocument($photoName->getFilename());
 
             $productRepository->add($product, true);
 
@@ -81,20 +72,8 @@ class ProductController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $form->get('photo')->getData();
-            if($file){
-                $originalName = $file->getClientOriginalName();
-            
-                $filename = $originalName;
-                $uploads_directory = $this->getParameter('uploads_directory') . "photos/";
-                $file->move(
-                    $uploads_directory,
-                    $filename
-                );
-                
-                $product->setDocument($filename);
-            }
-
+            $photoName = new PhotoService($form->get('photo')->getData(), $this->getParameter('uploads_directory'));
+            $product->setDocument($photoName->getFilename());
             $productRepository->add($product, true);
 
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);

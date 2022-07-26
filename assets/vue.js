@@ -9,5 +9,7 @@
 
 import './vue/vue.js'
 
+
+
 // start the Stimulus application
-import './bootstrap';
+// import './bootstrap';

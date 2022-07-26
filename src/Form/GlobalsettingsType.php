@@ -12,11 +12,9 @@ class GlobalsettingsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('closeWebsite')
             ->add('frames')
             ->add('zoom')
             ->add('maxItems')
-            ->add('closeRegister')
         ;
     }
 

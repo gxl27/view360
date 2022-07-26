@@ -4,24 +4,34 @@
 
 {% block body %}
     <h1>Product index</h1>
-
+    <div style='display:flex; gap:25px'>
+        <a href="{{ path('app_category_index') }}" class='btn-primary'>Category list</a>
+        <a href="{{ path('app_color_index') }}" class='btn-primary'>Color list</a>
+    
+    </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Photo</th>
                 <th>Stock</th>
-                <th>Status</th>
+                
                 <th>Price</th>
+                <th>Status</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for product in products %}
             <tr>
-                <td>{{ product.id }}</td>
+                <td>{{ loop.index }}</td>
+                <td>{{ product.variant.name }} {{ product.color.name }}</td>
+                <td><img style='max-width:50px' src="{{ vich_uploader_asset(product, 'productImages') }} " alt="product-{{ product.id }}"> </td>           
                 <td>{{ product.stock }}</td>
-                <td>{{ product.status }}</td>
+                
                 <td>{{ product.price }}</td>
+                <td>{{ product.getStatusFormated }}</td>
                 <td>
                     <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>

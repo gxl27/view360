@@ -73,7 +73,8 @@ Encore
     //.autoProvidejQuery()
 
     .enableVueLoader(() => {}, {
-                 useJsx: true
+                //  useJsx: true,
+                 runtimeCompilerBuild: true
              })
 ;
 

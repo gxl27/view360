@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Category;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\PhotoService\PhotoService;
 use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,9 @@ class CategoryController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoName = new PhotoService($form->get('photo')->getData(), $this->getParameter('uploads_directory'));
+            $category->setDocument($photoName->getFilename());
+
             $categoryRepository->add($category, true);
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
@@ -65,6 +69,9 @@ class CategoryController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoName = new PhotoService($form->get('photo')->getData(), $this->getParameter('uploads_directory'));
+            $category->setDocument($photoName->getFilename());
+
             $categoryRepository->add($category, true);
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);

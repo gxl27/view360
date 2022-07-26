@@ -39,6 +39,20 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+       public function findAllVisible(): array
+   {
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.state = :val')
+           ->setParameter('val', 1)
+           ->orderBy('c.name', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+
+
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

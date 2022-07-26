@@ -1,0 +1,8 @@
+{% block navbar %}
+<div style='display:flex;flex-direction:row;align-items:center;justify-content:space-evenly; height:45px'>
+    <a href="{{ path('app_admin') }}">Panel</a>
+    <a href="{{ path('app_product_index') }}">Product</a>
+    <a href="{{ path('app_globalsettings_show', {id:1}) }}">Settings</a>
+</div>
+
+{% endblock %}

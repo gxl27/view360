@@ -1,0 +1,74 @@
+$font-stack: Poppins, Helvetica, sans-serif;
+
+$color: #3a3a3a;
+$white: #f3f3f3;
+$bg-color: #ffffff;
+$font-size: 16px;
+$line-height: 1.5em;
+
+
+// $primary-color: #0e6cff;
+$primary-color: #3810CC;
+
+// $primary-color: #e0ffff;
+$secondary-color: #030031;
+$third-color: #1e9c65;
+$secondary-color-hover:  #61ac81;
+$third-color:#fafafa;
+$third-color-hover:#ffffff;
+$border-color:rgba(223, 223, 223, 0.055);
+$border-color-hover:rgba(223, 223, 223, 0.144);
+
+$success-color: #ffffff;
+$danger-color: #ffffff;
+$info-color: #ffffff;
+
+$success-bg: rgb(11, 151, 11);
+$danger-bg: red;
+$info-bg: rgb(39, 85, 145);
+
+// Set text color based on bg
+@function set-text-color($c) {
+    @if(lightness($c) > 70) {
+      @return #333;
+    } @else {
+      @return $color;
+    }
+  }
+  
+  // Set background & text color
+  @mixin set-background($color) {
+    background-color: $color;
+    color: set-text-color($color)
+  }
+
+
+// unselect
+%unselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgb(206, 206, 206);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #858585;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #757575;
+}

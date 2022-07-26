@@ -8,20 +8,31 @@
     <table class="table">
         <tbody>
             <tr>
+                
+                <td colspan='2'><img style='max-width:250px' src="{{ vich_uploader_asset(product, 'productImages') }} " alt="product-{{ product.id }}"> </td>           
+            </tr>
+            <tr>
+                
                 <th>Id</th>
                 <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                
+                <th>Name</th>
+                <td>{{ product.variant.name }} {{ product.color.name }}</td>
             </tr>
             <tr>
                 <th>Stock</th>
                 <td>{{ product.stock }}</td>
             </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ product.status }}</td>
-            </tr>
+            
             <tr>
                 <th>Price</th>
                 <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ product.statusFormated }}</td>
             </tr>
         </tbody>
     </table>

@@ -15,37 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class GlobalsettingsController extends BaseController
 {
-    /**
-     * @Route("/", name="app_globalsettings_index", methods={"GET"})
-     */
-    public function index(GlobalsettingsRepository $globalsettingsRepository): Response
-    {
-        return $this->render('admin/globalsettings/index.html.twig', [
-            'globalsettings' => $globalsettingsRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="app_globalsettings_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, GlobalsettingsRepository $globalsettingsRepository): Response
-    {
-        $globalsetting = new Globalsettings();
-        $form = $this->createForm(GlobalsettingsType::class, $globalsetting);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $globalsettingsRepository->add($globalsetting, true);
-
-            return $this->redirectToRoute('app_globalsettings_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('admin/globalsettings/new.html.twig', [
-            'globalsetting' => $globalsetting,
-            'form' => $form,
-        ]);
-    }
-
+    
     /**
      * @Route("/{id}", name="app_globalsettings_show", methods={"GET"})
      */

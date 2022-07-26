@@ -1,0 +1,43 @@
+@use 'config';
+
+%btn {
+    @extend %unselect;
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    padding: .7em .9em;
+    cursor: pointer;
+    transition: all ease .3s;
+  
+    // &:hover {
+    //   transform: scale(.98);
+    // }
+  }
+  
+  .btn-primary {
+    @extend %btn;
+    color:#ffffff;
+    background-color: config.$primary-color;
+  }
+  .btn-primary:hover {
+    color:#333 !important;
+    @include config.set-background(lighten(config.$primary-color, 10%));
+    
+  }
+
+  
+  .btn-secondary {
+    @extend %btn;
+    background-color: config.$secondary-color;
+    color:rgb(245, 245, 245) !important;
+ 
+  }
+
+  .btn-secondary:hover {
+
+    @include config.set-background(lighten(config.$secondary-color, 10%));
+    color:rgb(19, 19, 19);
+    
+  }
+
+  

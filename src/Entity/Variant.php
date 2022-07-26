@@ -6,14 +6,21 @@ use App\Repository\VariantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
  * @ORM\Entity(repositoryClass=VariantRepository::class)
+  * @Vich\Uploadable
  */
 class Variant
 {
-    
+    const EXTENSIONS = [
+        'jpeg', 'jpg', 'png'
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -30,6 +37,18 @@ class Variant
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+     /**
+     * @ORM\Column(type="string", length=255,  nullable=true)
+     * @var string
+     */
+    private $document;
+
+    /**
+     * @Vich\UploadableField(mapping="variant_images", fileNameProperty="document")
+     * @var File
+     */
+    private $variantImages;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -70,6 +89,18 @@ class Variant
         return $this;
     }
 
+    public function getDocument(): ?string
+    {
+        return $this->document;
+    }
+
+    public function setDocument(?string $document): self
+    {
+        $this->document = $document;
+
+        return $this;
+    }
+
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
@@ -106,6 +137,40 @@ class Variant
         $this->category = $category;
 
         return $this;
+    }
+
+    public function setVariantImages(File $document = null)
+    {
+        $this->variantImages = $document;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($this->variantImages instanceof UploadedFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    public function getVariantImages()
+    {
+        return $this->variantImages;
+    }
+
+    public function getExtension(){
+
+        $doc = $this->getDocument();
+        $extension = pathinfo($doc, PATHINFO_EXTENSION);
+
+        return $extension;
+    }
+
+    public function checkValidExtension($file){
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        if(!in_array($extension, SELF::EXTENSIONS)){
+            return 0;
+        }
+        return $extension;
     }
 
 

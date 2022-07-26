@@ -1,12 +1,16 @@
 <template>
    <div>
-       <p>This is an example of a new components in VueJs</p>
+       <p>this is carousel</p>
    </div>
 </template>
 <script>
    export default {
-       name: "example"
+       name: "cart",
+
    }
 </script>
 <style scoped>
+p {
+   color:blue !important;
+}
 </style>

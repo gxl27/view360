@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Variant;
 use App\Entity\Variant;
 use App\Form\VariantType;
 use App\Repository\VariantRepository;
+use App\Service\PhotoService\PhotoService;
 use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,9 @@ class VariantController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoName = new PhotoService($form->get('photo')->getData(), $this->getParameter('uploads_directory'));
+            $variant->setDocument($photoName->getFilename());
+
             $variantRepository->add($variant, true);
 
             return $this->redirectToRoute('app_variant_index', [], Response::HTTP_SEE_OTHER);
@@ -65,6 +69,10 @@ class VariantController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $photoName = new PhotoService($form->get('photo')->getData(), $this->getParameter('uploads_directory'));
+            $variant->setDocument($photoName->getFilename());
+
             $variantRepository->add($variant, true);
 
             return $this->redirectToRoute('app_variant_index', [], Response::HTTP_SEE_OTHER);

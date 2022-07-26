@@ -1,0 +1,39 @@
+{% block navbar %}
+<header>
+<div>
+  <div id="logo" class='menu-item'>
+   <img src="/img/logo.svg">
+  </div>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <nav>
+    <ul>
+      {% for category in categories %}
+      <li class='menu-item' data-scroll="#{{ category.name }}">
+          <span>{{  category.name }}</span>
+      </li>
+      {% endfor %}
+      
+      <li id='msg-me' class='menu-item btn-primary'>
+          <div class='msg-me-content'>
+            <img src='img/cart.svg'>
+            <div id='msg-me-counter'>
+              
+            </div>
+          </div>
+          <div>
+            {% if app.user %}
+              <span> {{ app.user.username }}</span>
+            {% else %}
+                <span> Anonim</span>
+            {% endif %}
+          </div>
+      </li>
+  </ul>
+  </nav>
+  <label for="nav-toggle" class="nav-toggle-label">
+    <span></span>
+  </label>
+</div>
+</header>
+
+{% endblock %}

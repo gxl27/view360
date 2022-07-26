@@ -18,6 +18,11 @@ class Product
         'jpeg', 'jpg', 'png'
     ];
     
+    const STATUS = [
+        0 => 'unavailable',
+        1 => 'available',
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -40,6 +45,10 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255,  nullable=true)
@@ -67,6 +76,7 @@ class Product
 
     public function __construct()
     {
+        $this->updatedAt = new \DateTime();
         $this->status = 1;
     }
 
@@ -87,9 +97,27 @@ class Product
         return $this;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function getStatus(): ?int
     {
         return $this->status;
+    }
+
+    public function getStatusFormated(){
+
+        return SELF::STATUS[$this->getStatus()];
+
     }
 
     public function setStatus(?int $status): self

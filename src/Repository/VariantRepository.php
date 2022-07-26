@@ -39,6 +39,19 @@ class VariantRepository extends ServiceEntityRepository
         }
     }
 
+
+   public function findAllGroupedByCaterogy(): array
+   {
+       return $this->createQueryBuilder('p')
+            ->select('count(u.id) as count','u.id', 'u.name', 'u.document')
+            ->leftJoin('p.category', 'u')
+            ->groupBy('u.id')
+            ->orderBy('u.name', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 //    /**
 //     * @return Variant[] Returns an array of Variant objects
 //     */

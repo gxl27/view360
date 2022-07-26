@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Variant;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,6 +26,15 @@ class VariantType extends AbstractType
                 'label' => 'Choose category',
                 'attr' => ['class' => 'form-control',
               ]
+            ])
+            ->add('photo', FileType::class, [
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10240k',
+                    ])
+                ],
             ])
 
         ;

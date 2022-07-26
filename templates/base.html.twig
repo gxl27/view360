@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html>
+    {% set checkroute = '/admin' %}
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {# {{ encore_entry_link_tags('vue') }} #}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {# {{ encore_entry_script_tags('vue') }} #}
+            {{ encore_entry_script_tags('app') }}
+            
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block adminNavbar %}
+            {% if checkroute in app.request.pathInfo %}
+                {% include "/admin/_navbar/_index.html.twig" %}
+            {% endif %}  
+        {% endblock %}
+
+        {% block flashes %}
+            {% include "/_flashes/_flashes.html.twig" %}
+        {% endblock %}
+
+        {% block upscreen %}
+            {# include upscreen (can be removed if needed, overwriting the block) #}
+            <div id='up-screen'>
+                <img src="/img/chev-up.svg" alt="up-arr"/>
+            </div>
+        {% endblock %}
+
+
+        <div id="main" class='container'>
+            {% block body %}{% endblock %}
+        
+        </div>
+
+        {% block footer %}
+            {# include footer #}
+            {% include "/_footer/_footer.html.twig" %}
+        {% endblock %}
+     
     </body>
 </html>

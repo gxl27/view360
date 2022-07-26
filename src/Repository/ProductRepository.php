@@ -39,6 +39,21 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Product[] Returns an array of Product objects
+    */
+   public function findAllByVariant($variantId): array
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.variant = :val')
+           ->setParameter('val', $variantId)
+           ->orderBy('p.id', 'ASC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

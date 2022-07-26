@@ -30,5 +30,8 @@
   "version": "1.0.0",
   "description": "vue js exemple",
   "main": "webpack.config.js",
-  "author": ""
+  "author": "",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
 }
