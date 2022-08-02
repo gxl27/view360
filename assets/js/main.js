@@ -4,10 +4,13 @@ let banner = document.querySelector('#banner');
 let headerBar = document.querySelector('header');
 let menuItems = document.querySelectorAll('.menu-item');
 let logo = document.querySelector('#logo');
-
+// main.style.visibility = 'visible';
+// body.style.visibility = 'hidden';
 document.addEventListener("DOMContentLoaded", function(){
-    if(main){
-        main.style.visibility = 'visible';
+    if(body){
+        body.style.visibility = 'visible';
+        body.style.opacity = '1';
+
     }
 
 });
@@ -80,7 +83,7 @@ function scrollUpScreen(){
     
         }else{
             if(headerBar){
-                headerBar.style.backgroundColor = "transparent";
+                headerBar.style.backgroundColor = "rgba(0,0,0,0)";
 
             }
             upScreen.style.display = 'none'

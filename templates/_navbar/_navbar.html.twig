@@ -13,20 +13,8 @@
       </li>
       {% endfor %}
       
-      <li id='msg-me' class='menu-item btn-primary'>
-          <div class='msg-me-content'>
-            <img src='img/cart.svg'>
-            <div id='msg-me-counter'>
-              
-            </div>
-          </div>
-          <div>
-            {% if app.user %}
-              <span> {{ app.user.username }}</span>
-            {% else %}
-                <span> Anonim</span>
-            {% endif %}
-          </div>
+      <li id='nav-cart' class='menu-item btn-primary'>
+         
       </li>
   </ul>
   </nav>

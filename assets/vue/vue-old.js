@@ -2,16 +2,15 @@
 // import Vue from 'vue';
 import { createApp } from 'vue'
 import axios from 'axios'
+import Category from './components/Category.vue'
 
-
-// import Category from './components/Category.vue'
-import NavCart from './components/NavCart.vue'
+// import Cart from './components/Cart.vue'
 /**
 * Create a fresh Vue Application instance
 */
 
-const appContent = createApp({
-   data: () => {
+const app = createApp({
+    data: () => {
         return {
             image: '/uploads/photos',
             categories: {},
@@ -38,8 +37,7 @@ const appContent = createApp({
             this.categories  = await axios.get('/api/category')
             .then(res =>res.data)
             .catch(err =>console.error(err));
-            document.querySelector('#content').style.opacity = "1";
-            document.querySelector('#content').style.visibility = "visible"
+
         },
         async getVariant(variantId) {
                 let apiUrl =  "/api/variant/" + variantId
@@ -93,6 +91,7 @@ const appContent = createApp({
                         </div>
                     </div>
                 </div>
+
                 <div v-show="this.cartDisplay"
                         :class="'cart'">
                     <div>
@@ -144,6 +143,7 @@ const appContent = createApp({
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -156,26 +156,7 @@ const appContent = createApp({
     }
 })
 
-const navCart = createApp({
-    data: () => {
-         return {
-             image: '/uploads/photos',
-             categories: {},
-             variant:"",
-             product:"",
-             products:{},
-             cartDisplay:0,
-             cartCounter:3,
-         }
-     },
-    
-     components: {
-         NavCart
-     },
-     template: `<NavCart></NavCart>`
-})
 
-appContent.mount('#content')
-navCart.mount('#nav-cart')
+app.mount('#app')
 
 

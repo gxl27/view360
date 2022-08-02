@@ -1,27 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}View 360 Shopping inovations{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <style>
+        body {
+            visibility:hidden;
+            opacity:.2;
+            transition: .7s ease-in-out all;
+        }
         #main {
             padding:0 !important;
+        }
+        
+        #content {
+            visibility:hidden;
+            opacity:0;
+            transition: .7s ease-in-out all;
         }
     </style>
 {% endblock %}
 {% block adminNavbar %}
     {{ include('/_navbar/_navbar.html.twig') }}
 {% endblock %}
-{% block body %}
 
 
 {% block javascripts %}
-    {{ parent() }}
     {{ encore_entry_script_tags('vue') }}
+    {{ parent() }}
             
 {% endblock %}
 
-
+{% block body %}
+<div id='banner'>
+ <img style="width:100%" src="/img/banner.jpg">
+</div>
+<div id='content'>
+  
+</div>
+{% endblock %}
 
 {# <div>
     {% for product in products %}
@@ -30,10 +47,5 @@
 
     {% endfor %}
 </div> #}
-<div id='banner'>
- <img style="width:100%" src="/img/banner.jpg">
-</div>
-<div id='app'>
-    <product></product>
-</div>
-{% endblock %}
+
+
